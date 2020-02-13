@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source envs.sh
+source /vagrant/vagrant/envs.sh
 microk8s.enable registry
-sudo apt-get install -y ruby libsnappy-dev
+sudo apt-get install -y ruby libsnappy-dev ruby-dev bundler
 sudo gem install bundler
 cd /vagrant
 ./ci/build.sh
@@ -24,4 +24,5 @@ helm install . \
     --set sumologic.traces.enable=true \
     --set image.repository=localhost:32000/sumologic/kubernetes-fluentd \
     --set image.tag=latest \
-    --set image.pullPolicy=Always
+    --set image.pullPolicy=Always \
+    --set sumologic.fluentdLogLevel=debug
