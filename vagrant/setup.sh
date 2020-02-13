@@ -24,6 +24,4 @@ helm install . \
     --set sumologic.traces.enable=true \
     --set image.repository=localhost:32000/sumologic/kubernetes-fluentd \
     --set image.tag=latest \
-    --set image.pullPolicy=Always \
-    --debug \
-    --dry-run | less
+    --set image.pullPolicy=Always
