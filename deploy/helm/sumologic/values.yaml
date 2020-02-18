@@ -28,6 +28,24 @@ eventsDeployment:
       memory: 256Mi
       cpu: "100m"
 
+otelcolDeployment:
+  nodeSelector: {}
+  tolerations: {}
+  replicas: 1
+  resources:
+    limits:
+      memory: 2Gi
+      cpu: 1
+    requests:
+      memory: 384Mi
+      cpu: "200m"
+  # Memory Ballast size should be max 1/3 to 1/2 of memory.
+  memBallastSizeMib: "683"
+  image:
+    name: "omnition/opentelemetry-collector-contrib"
+    tag: "0.0.5"
+    pullPolicy: "Always"
+
 sumologic:
   ## Setup
 
@@ -88,6 +106,10 @@ sumologic:
   events:
     # Source category for the Events source. Default: "{clusterName}/events"
     sourceCategory: ""
+
+  # Traces configuration
+  traces:
+    enable: false
 
   ## Format to post logs into Sumo. json, json_merge, or text
   logFormat: fields
