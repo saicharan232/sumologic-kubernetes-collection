@@ -32,8 +32,8 @@ exporters:
   #   num_workers: 8
   #   reconnection_delay: 2s
   #   secure: true
-  # zipkin:
-  #   url: "http://somezipkin.target.com:9411/api/v2/spans" # Replace with a real endpoint.
+  zipkin:
+    url: http://{{ template "sumologic.fullname" . }}:9411/api/v2/spans
   # logging:
   #   loglevel: debug
   jaeger_grpc:
