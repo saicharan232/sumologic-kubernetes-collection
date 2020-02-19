@@ -44,7 +44,7 @@ otelcolDeployment:
   image:
     name: "omnition/opentelemetry-collector-contrib"
     tag: "0.0.5"
-    pullPolicy: "Always"
+    pullPolicy: IfNotPresent
 
 sumologic:
   ## Setup
