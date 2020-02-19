@@ -109,7 +109,7 @@ sumologic:
 
   # Traces configuration
   traces:
-    enable: false
+    enabled: false
 
   ## Format to post logs into Sumo. json, json_merge, or text
   logFormat: fields

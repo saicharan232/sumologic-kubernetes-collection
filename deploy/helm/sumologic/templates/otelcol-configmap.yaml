@@ -1,4 +1,4 @@
-{{- if eq .Values.sumologic.traces.enable true }}
+{{- if eq .Values.sumologic.traces.enabled true }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
