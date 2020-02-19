@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ printf "%s-otelcol" (include "sumologic.name" .) }}
+  name: {{ printf "%s-otelcol" (include "sumologic.fullname" .) }}
   labels:
     app: {{ printf "%s-otelcol" (include "sumologic.labels.app" .) }}
     {{- include "sumologic.labels.common" . | nindent 4 }}

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-otelcol" (include "sumologic.name" .) }}
+  name: {{ printf "%s-otelcol" (include "sumologic.fullname" .) }}
   labels:
     app: {{ printf "%s-otelcol" (include "sumologic.labels.app" .) }}
     {{- include "sumologic.labels.common" . | nindent 4 }}
@@ -61,6 +61,6 @@ spec:
             port: 13133 # Health Check extension default port.
       volumes:
         - configMap:
-            name: {{ printf "%s-otelcol" (include "sumologic.name" .) }}
+            name: {{ printf "%s-otelcol" (include "sumologic.fullname" .) }}
           name: otel-collector-config-vol
 {{- end }}
