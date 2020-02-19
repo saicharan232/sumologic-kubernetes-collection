@@ -21,31 +21,23 @@ processors:
     queue_size: 10000
     retry_on_failure: true
   batch:
-    send_batch_size: 128
+    send_batch_size: 1024
     timeout: 5s
 extensions:
   health_check: {}
 exporters:
-  # opencensus:
-  #   compression: "gzip"
-  #   endpoint: "someopencensus.target.com:443" # Replace with a real endpoint.
-  #   num_workers: 8
-  #   reconnection_delay: 2s
-  #   secure: true
   zipkin:
     url: http://{{ template "sumologic.fullname" . }}:9411/api/v2/spans
   # logging:
   #   loglevel: debug
-  jaeger_grpc:
-    endpoint: "jaeger:14250" # Replace with a real endpoint.
 service:
   extensions: [health_check]
   pipelines:
     traces/1:
-      receivers: [jaeger]
+      receivers: [jaeger, zipkin, opencensus]
       processors: [batch, queued_retry, k8s_tagger]
-      exporters: [jaeger_grpc]
+      exporters: [zipkin]
     traces/2:
-      receivers: [jaeger]
+      receivers: [jaeger, zipkin, opencensus]
       processors: [batch, queued_retry, k8s_tagger]
-      exporters: [jaeger_grpc]
+      exporters: [zipkin]
